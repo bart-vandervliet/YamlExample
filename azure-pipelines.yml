@@ -6,6 +6,7 @@ parameters:
 - name: BooleanValue
   displayName: Boolean Value
   type: boolean
+  default: true
 
 trigger:
 - main
