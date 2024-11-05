@@ -36,7 +36,7 @@ steps:
   displayName: Only runs when the previous step fails
   condition: failed()
 
-- script: echo Merging $(Build.SourceBranch) into $(System.PullRequest.TargetBranch)
+- script: echo Merging $(System.PullRequest.SourceBranch) into $(System.PullRequest.TargetBranch) through $(Build.SourceBranch)
   displayName: Only runs when in a pull request
   condition: eq(variables['Build.Reason'], 'PullRequest')
 
