@@ -73,8 +73,8 @@ steps:
 - script: echo Hello, world!
   displayName: 'Run a one-line script'
 
-- {{ myStep }}
-- {{ mySteplist }}
+- ${{ parameters.myStep }}
+- ${{ parameters.mySteplist }}
 
 - script: |
     echo Add other tasks to build, test, and deploy your project.
