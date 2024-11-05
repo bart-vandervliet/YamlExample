@@ -9,6 +9,11 @@ trigger:
 pool:
   vmImage: ubuntu-latest
 
-steps:
-- script: echo Hello, world from YAML pipeline!
-  displayName: 'Run a one-line script'
+stages:
+- stage: First stage
+    jobs:
+    - job: First job
+        steps:
+        - script: echo Hello, world from YAML pipeline!
+          displayName: 'Run a one-line script'
+
