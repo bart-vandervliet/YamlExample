@@ -39,3 +39,11 @@ steps:
 - script: echo Hello World!
   displayName: Only runs when in a pull request
   condition: eq(variables['Build.Reason'], 'PullRequest')
+
+- script: echo Hello World!
+  displayName: Only runs when MultipleChoiceRadio = true, branch = 6-conditions and variable = development
+  condition: and(
+                eq(${{ parameters.BooleanValue }}, true),
+                eq(variables['Build.SourceBranch'], 'refs/heads/6-conditions'),
+                eq(variables['foo'], 'development')
+             )
