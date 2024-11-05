@@ -7,14 +7,23 @@ parameters:
   displayName: Text Value
   type: string
   default: Default text value...
-- name: MultipleChoice
-  displayName: Multiple Choice
+- name: MultipleChoiceRadio
+  displayName: Multiple Choice radio (up to 3)
   type: string
   values:
   - a
   - b
   - c
   default: b
+- name: MultipleChoiceDropdown
+  displayName: Multiple Choice dropdown (4 and more)
+  type: string
+  values:
+  - a
+  - b
+  - c
+  - d
+  default: c
 - name: NumericValue
   displayName: Numeric Value
   type: number
