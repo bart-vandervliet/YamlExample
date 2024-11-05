@@ -3,39 +3,6 @@
 # Add steps that build, run tests, deploy, and more:
 # https://aka.ms/yaml
 parameters:
-- name: TextValue
-  displayName: Text Value
-  type: string
-  default: Default text value...
-- name: MultipleChoiceRadio
-  displayName: Multiple Choice radio (up to 3)
-  type: string
-  values:
-  - a
-  - b
-  - c
-  default: b
-- name: MultipleChoiceDropdown
-  displayName: Multiple Choice dropdown (4 and more)
-  type: string
-  values:
-  - a
-  - b
-  - c
-  - d
-  default: c
-- name: NumericValue
-  displayName: Numeric Value
-  type: number
-- name: MultipleNumericChoice
-  displayName: Multiple Numeric Choice
-  type: number
-  values:
-  - 1
-  - 2
-  - 3
-  - 999
-  default: 999
 - name: BooleanValue
   displayName: Boolean Value
   type: boolean
@@ -46,9 +13,18 @@ trigger:
 pool:
   vmImage: ubuntu-latest
 
+variables:
+- group: DevelopmentVariables
+
 steps:
-- script: echo TextValue = ${{ parameters.TextValue }}
-  displayName: MultipleChoiceRadio = ${{ parameters.MultipleChoiceRadio }}
-  condition: eq(${{ parameters.BooleanValue }}, true) # of ${{ eq(parameters.BooleanValue, true) }}
-- script: echo NumericValue = ${{ parameters.NumericValue }}
-- script: echo MultipleNumericChoice = $(MultipleNumericChoice)
+- script: echo Hello World!
+  displayName: Only runs when MultipleChoiceRadio = true
+  condition: eq(${{ parameters.BooleanValue }}, true)
+
+- script: echo Hello World!
+  displayName: Only runs when branch is main
+  condition: eq(variables['Build.SourceBranch'], 'refs/heads/main')
+
+- script: echo Hello World!
+  displayName: Only runs when variable foo from variable group = development
+  condition: eq(variables['foo'], 'development')
