@@ -22,9 +22,13 @@ steps:
   condition: eq(${{ parameters.BooleanValue }}, true)
 
 - script: echo Hello World!
-  displayName: Only runs when branch is main
-  condition: eq(variables['Build.SourceBranch'], 'refs/heads/main')
+  displayName: Only runs when branch is 6-conditions
+  condition: eq(variables['Build.SourceBranch'], 'refs/heads/6-conditions')
 
 - script: echo Hello World!
   displayName: Only runs when variable foo from variable group = development
   condition: eq(variables['foo'], 'development')
+
+- script: echo Hello World!
+  displayName: Only runs when the build is cancelled
+  condition: cancelled()
