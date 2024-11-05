@@ -52,6 +52,16 @@ parameters:
       one: apple
       two: pear
       count: 3
+- name: myStep
+  type: step
+  default:
+    script: echo my step 
+
+- name: mySteplist
+  type: stepList
+  default:
+    - script: echo step one  
+    - script: echo step two  
 
 trigger:
 - main
@@ -62,6 +72,9 @@ pool:
 steps:
 - script: echo Hello, world!
   displayName: 'Run a one-line script'
+
+- {{ myStep }}
+- {{ mySteplist }}
 
 - script: |
     echo Add other tasks to build, test, and deploy your project.
