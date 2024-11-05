@@ -29,6 +29,8 @@ steps:
   displayName: Only runs when variable foo from variable group = development
   condition: eq(variables['foo'], 'development')
 
+- script: 0/0
+
 - script: echo Hello World!
-  displayName: Only runs when the build is cancelled
-  condition: cancelled()
+  displayName: Only runs when the previous step fails
+  condition: failed()
