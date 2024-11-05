@@ -51,4 +51,4 @@ steps:
   displayName: MultipleChoiceRadio = ${{ parameters.MultipleChoiceRadio }}
   condition: eq(${{ parameters.BooleanValue }}, true)
 - script: echo NumericValue = ${{ parameters.NumericValue }}
-- script: echo MultipleNumbericChoice = $(MultipleNumbericChoice)
+- script: echo MultipleNumericChoice = $(MultipleNumericChoice)
