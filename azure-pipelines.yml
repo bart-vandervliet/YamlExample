@@ -24,10 +24,25 @@ stages:
       displayName: Run a multi-line script
 
 - stage:
-  displayName: Release stage
+  displayName: Deployment release
   jobs:
-  - job:
-    displayName: Release job
-    steps:
-    - script: echo Hello world from Release!
-      displayName: Hello World
+  - deployment:
+    displayName: Development release
+    environment: DevelopmentEnvironment
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+            - script: echo "Deploying to Development environment"
+
+- stage:
+  displayName: Production release
+  jobs:
+  - deployment:
+    displayName: Production release
+    environment: ProductionEnvironment
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+            - script: echo "Deploying to Production environment"
