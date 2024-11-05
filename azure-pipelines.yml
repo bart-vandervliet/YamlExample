@@ -39,29 +39,6 @@ parameters:
 - name: BooleanValue
   displayName: Boolean Value
   type: boolean
-- name: ObjectValue
-  type: object
-  default:
-    foo: FOO
-    bar: BAR
-    things:
-    - one  
-    - two  
-    - three  
-    nested:
-      one: apple
-      two: pear
-      count: 3
-- name: myStep
-  type: step
-  default:
-    script: echo my step 
-
-- name: mySteplist
-  type: stepList
-  default:
-    - script: echo step one  
-    - script: echo step two  
 
 trigger:
 - main
@@ -70,13 +47,13 @@ pool:
   vmImage: ubuntu-latest
 
 steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
-
-- ${{ parameters.myStep }}
-- ${{ parameters.mySteplist }}
+- script: echo ${{ parameters.TextValue }}
+  displayName: Run a one-line script ${{ parameters.MultipleChoiceRadio }}
+  condition: eq(${{ parameters.BooleanValue }}, true)
+- script: echo $(NumericValue) chosen
+- script: echo $(MultipleNumbericChoice) chosen
 
 - script: |
     echo Add other tasks to build, test, and deploy your project.
     echo See https://aka.ms/yaml
-  displayName: 'Run a multi-line script'
+  displayName: Run a multi-line script
