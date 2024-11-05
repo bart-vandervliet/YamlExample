@@ -10,10 +10,20 @@ pool:
   vmImage: ubuntu-latest
 
 stages:
-- stage: First stage
-    jobs:
-    - job: First job
-        steps:
-        - script: echo Hello, world from YAML pipeline!
-          displayName: 'Run a one-line script'
+- stage:
+  displayName: Build stage
+  jobs:
+  - job:
+    displayName: Agent job 1
+    steps:
+    - script: echo Hello, world from YAML pipeline!
+      displayName: Hello World
 
+- stage:
+  displayName: Release stage
+  jobs:
+  - job:
+    displayName: Release job
+    steps:
+    - script: echo Hello world from Release!
+      displayName: Hello World
