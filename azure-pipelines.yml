@@ -34,3 +34,7 @@ steps:
 - script: echo Hello World!
   displayName: Only runs when the previous step fails
   condition: failed()
+
+- script: echo Hello World!
+  displayName: Only runs when in a pull request
+  condition: eq(variables['Build.Reason'], 'PullRequest')
