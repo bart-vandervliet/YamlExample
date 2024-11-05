@@ -49,6 +49,6 @@ pool:
 steps:
 - script: echo TextValue = ${{ parameters.TextValue }}
   displayName: MultipleChoiceRadio = ${{ parameters.MultipleChoiceRadio }}
-  condition: eq(parameters.BooleanValue, true)
+  condition: eq(${{ parameters.BooleanValue }}, true) # of ${{ eq(parameters.BooleanValue, true) }}
 - script: echo NumericValue = ${{ parameters.NumericValue }}
 - script: echo MultipleNumericChoice = $(MultipleNumericChoice)
