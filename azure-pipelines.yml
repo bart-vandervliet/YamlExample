@@ -19,7 +19,7 @@ variables:
 - group: ${{ parameters.Environment }}Variables
 
 stages:
-- stage:
+- stage: BuildStage
   displayName: Build stage
   variables:
     RuntimeExpressionIndex: $[ eq(variables['foo'], 'production') ]
