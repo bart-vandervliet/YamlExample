@@ -14,7 +14,7 @@ trigger:
 - main
 
 variables:
-- template: variables\${{ parameters.Environment }}-variables.yml
+- template: variables\${{ parameters.Environment }}.yml
 
 pool:
   vmImage: ubuntu-latest
