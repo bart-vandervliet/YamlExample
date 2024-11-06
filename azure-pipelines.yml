@@ -35,13 +35,14 @@ steps:
   displayName: Runtime expression - index syntax
 
 - script: echo foo != 'production' --> $(RuntimeExpressionPropertyDereference)
-  displayName: Runtime expression - property dereference syntax 
+  displayName: Runtime expression - property dereference syntax
 
 - script: echo '##vso[task.setvariable variable=localVar]foo'
   displayName: Set variable localVar
   name: SetLocalVariable
 
-- script: echo ${{ variables.Foo }}
+- script: echo ${{ variables.Foo }} 
+  # dit werkt alleen als de variabele door een compile time variable of constante is ingesteld
 
 - script: echo localVar = $(localVar)
   displayName: Display variable localVar
