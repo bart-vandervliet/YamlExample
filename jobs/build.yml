@@ -1,8 +1,9 @@
 jobs:
 - job: BuildJob
   steps:
-  - template: ..\steps\hello-world.yml
-  - template: ..\steps\echo-variable.yml
-  - template: ..\steps\parameters.yml
+  - template: ..\steps\component-list-parameter.yml
     parameters:
-      EchoParameter: Bart
+      Steps:
+      - script: echo 'Injected!'
+      - template: ..\steps\hello-world.yml
+      - script: echo 'Third step...'
