@@ -7,9 +7,13 @@ parameters:
   type: object
   default: [ One, Two, Three ]
 
-- name: Boolean
-  displayName: Display number of items
-  type: boolean
+- name: Option
+  displayName: Choose an option
+  type: string
+  values:
+    - Template expression list count
+    - Conditional expression list count
+    - Don't display list count
 
 - name: AdditionalVariables
   type: object
@@ -27,13 +31,18 @@ variables:
   ${{ insert }}: ${{ parameters.AdditionalVariables }}
 
 steps:
-- ${{ if parameters.Boolean }}:
+- ${{ if eq(parameters.Option, 'Template expression list count') }}:
   - script: echo 'Items in list = ${{ length(parameters.List) }}'
     displayName: Display number of items (template expression)
 
-- script: echo 'Items in list = ${{ length(parameters.List) }}'
-  displayName: Display number of items (condition)
-  condition: ${{ parameters.Boolean }} 
+- ${{ elseif eq(parameters.Option, 'Conditional expression list count') }}:
+  - script: echo 'Items in list = ${{ length(parameters.List) }}'
+    displayName: Display number of items (condition)
+    condition: ${{ parameters.Boolean }} 
+
+- ${{ else }}:
+  - script: echo 'User chose not to display list count'
+    displayName: No list count
 
 - ${{ each item in parameters.List }}:
   - script: echo 'Item = ${{ item }}'
