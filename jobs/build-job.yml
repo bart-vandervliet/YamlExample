@@ -1,4 +1,5 @@
 jobs:
 - job: BuildJob
   steps:
-  - template: ..\Steps\build-step.yml
+  - template: ..\steps\hello-world.yml
+  - template: ..\steps\echo-variable.yml
