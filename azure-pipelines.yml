@@ -70,16 +70,12 @@ stages:
 
 - stage: ReleaseStage
   displayName: Release stage
-  dependsOn: BuildStage
   variables:
     OutputVarRuntimeExpression: $[ stageDependencies.BuildStage.AgentJob1.outputs['SetOutputVariable.outputVar'] ]
 
   jobs:
   - job:
     displayName: Agent job 3
-    variables:
-      OutputVarRuntimeExpression1: $[ stageDependencies.BuildStage.AgentJob1.outputs['SetOutputVariable.outputVar'] ]
-
     steps:
-    - script: echo outputVar = $(OutputVarRuntimeExpression)  $(OutputVarRuntimeExpression1)
+    - script: echo outputVar = $(OutputVarRuntimeExpression)
       displayName: Display variable outputVar - runtime expression
