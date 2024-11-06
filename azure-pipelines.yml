@@ -9,4 +9,4 @@ pool:
   vmImage: ubuntu-latest
 
 stages:
-- template: stages\build.yml
+- template: stages\build-and-release.yml
