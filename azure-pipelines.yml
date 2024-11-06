@@ -29,10 +29,10 @@ steps:
 - script: echo parameters.Environment = ${{ parameters.Environment }}
   displayName: Display compile time parameter Environment
 
-- script: echo $(RuntimeExpressionIndex)
+- script: echo foo == 'production' --> $(RuntimeExpressionIndex)
   displayName: Runtime expression - index syntax
 
-- script: echo $(RuntimeExpressionPropertyDereference)
+- script: echo foo != 'production' --> $(RuntimeExpressionPropertyDereference)
   displayName: Runtime expression - property dereference syntax 
 
 - script: echo '##vso[task.setvariable variable=localVar]foo'
