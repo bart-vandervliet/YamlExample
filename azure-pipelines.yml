@@ -72,14 +72,14 @@ stages:
   displayName: Release stage
   dependsOn: BuildStage
   variables:
-    OutputVarRuntimeExpression: $[ dependencies.BuildStage.AgentJob1.outputs['SetOutputVariable.outputVar'] ]
+    OutputVarRuntimeExpression: $[ stageDependencies.BuildStage.AgentJob1.outputs['SetOutputVariable.outputVar'] ]
 
   jobs:
   - job:
     displayName: Agent job 3
     variables:
-      OutputVarRuntimeExpression1: $[ dependencies.BuildStage.AgentJob1.outputs['SetOutputVariable.outputVar'] ]
+      OutputVarRuntimeExpression1: $[ stageDependencies.BuildStage.AgentJob1.outputs['SetOutputVariable.outputVar'] ]
 
     steps:
-    - script: echo outputVar = $(OutputVarRuntimeExpression1)
+    - script: echo outputVar = $(OutputVarRuntimeExpression)  $(OutputVarRuntimeExpression1)
       displayName: Display variable outputVar - runtime expression
