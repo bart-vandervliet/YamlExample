@@ -8,50 +8,27 @@ trigger:
 pool:
   vmImage: ubuntu-latest
 
+variables:
+  GlobalVariable: global
+
 stages:
-- stage: BuildStage
+- stage:
   displayName: Build stage
-
-  jobs:
-  - job: AgentJob1
-    displayName: Agent job 1
-    steps:
-    - script: echo '##vso[task.setvariable variable=localVar]foo'
-      displayName: Set variable localVar
-      name: SetLocalVariable
-    
-    - script: echo localVar = $(localVar)
-      displayName: Display variable localVar
-    
-    - script: echo '##vso[task.setvariable variable=outputVar;isoutput=true]bar'
-      displayName: Set variable outputVar
-      name: SetOutputVariable
-
-  - job:
-    displayName: Agent job 2
-    dependsOn: AgentJob1
-    variables:
-      LocalVarRuntimeExpression: $[ dependencies.AgentJob1.outputs['SetLocalVariable.localVar'] ]
-      OutputVarRuntimeExpression: $[ dependencies.AgentJob1.outputs['SetOutputVariable.outputVar'] ]
-
-    steps:
-    - script: echo localVar = $(localVar)
-      displayName: Display variable localVar - runtime variable
-    
-    - script: echo localVar = $(LocalVarRuntimeExpression)
-      displayName: Display variable localVar - runtime expression
-    
-    - script: echo outputVar = $(OutputVarRuntimeExpression)
-      displayName: Display variable outputVar - runtime expression
-
-- stage: ReleaseStage
-  displayName: Release stage
   variables:
-    OutputVarRuntimeExpression: $[ stageDependencies.BuildStage.AgentJob1.outputs['SetOutputVariable.outputVar'] ]
+    StageVariable: stage
 
   jobs:
   - job:
-    displayName: Agent job 3
+    displayName: Agent job
+    variables:
+      JobVariable: job
+
     steps:
-    - script: echo outputVar = $(OutputVarRuntimeExpression)
-      displayName: Display variable outputVar - runtime expression
+    - script: echo GlobalVariable = $(GlobalVariable)
+      displayName: Display global variable
+    
+    - script: echo StageVariable = $(StageVariable)
+      displayName: Display stage variable
+    
+    - script: echo JobVariable = $(JobVariable)
+      displayName: Display job variable
