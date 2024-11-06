@@ -4,5 +4,7 @@ parameters:
 
 steps:
 - script: echo 'The force awakens'
+  displayName: Star Wars quote #1
 - ${{ parameters.SingleStep }}
 - script: echo 'Do. Or do not. There is no try.'
+  displayName: Star Wars quote #2
