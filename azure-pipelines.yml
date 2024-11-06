@@ -13,9 +13,6 @@ parameters:
 trigger:
 - main
 
-variables:
-- template: variables\${{ parameters.Environment }}.yml
-
 pool:
   vmImage: ubuntu-latest
 
