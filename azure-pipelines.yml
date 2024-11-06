@@ -30,6 +30,12 @@ parameters:
     script: echo '¡Hola, Mundo!'
     displayName: Display Hello World in Spanish
 
+trigger:
+- main
+
+pool:
+  vmImage: ubuntu-latest
+  
 variables:
   foo: bar
   ${{ insert }}: ${{ parameters.AdditionalVariables }}
