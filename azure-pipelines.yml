@@ -15,6 +15,10 @@ parameters:
     - Conditional expression list count
     - Don't display list count
 
+- name: Boolean
+  displayName: Run Conditional expression list count
+  type: boolean
+
 - name: AdditionalVariables
   type: object
   default:
