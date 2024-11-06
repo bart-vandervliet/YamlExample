@@ -17,6 +17,10 @@ pool:
 
 variables:
 - group: ${{ parameters.Environment }}Variables
+- name: RuntimeExpressionIndex
+  value: $[ eq(variables['foo'], 'production') ]
+- name: RuntimeExpressionPropertyDereference
+  value: $[ ne(variables.foo, 'production') ]
 
 steps:
 - script: echo foo = $(foo)
