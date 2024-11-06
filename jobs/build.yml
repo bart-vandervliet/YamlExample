@@ -3,3 +3,6 @@ jobs:
   steps:
   - template: ..\steps\hello-world.yml
   - template: ..\steps\echo-variable.yml
+  - template: ..\steps\parameters.yml
+    parameters:
+      EchoParameter: Bart
