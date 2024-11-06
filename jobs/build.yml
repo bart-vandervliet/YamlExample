@@ -9,8 +9,3 @@ jobs:
       - template: ..\steps\hello-world.yml
       - script: echo 'Third step...'
         displayName: Inject third step
-  - template: ..\steps\single-step.yml
-    parameters:
-      SingleStep:
-      - script: echo 'Another injected step!'
-        displayName: Inject another step
