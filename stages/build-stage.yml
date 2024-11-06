@@ -1,4 +1,4 @@
 stages:
 - stage: BuildStage
   jobs:
-  - template: ..\jobs\build-job.yml
+  - template: ..\jobs\build.yml
