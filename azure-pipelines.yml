@@ -20,6 +20,7 @@ parameters:
   type: step
   default:
     script: echo '¡Hola, Mundo!'
+    displayName: Display Hello World in Spanish
 
 variables:
   foo: bar
