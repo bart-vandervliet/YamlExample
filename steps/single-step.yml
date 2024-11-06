@@ -1,0 +1,8 @@
+parameters:
+- name: SingleStep
+  type: step
+
+steps:
+- script: echo 'The force awakens'
+- ${{ parameters.SingleStep }}
+- script: echo 'Do. Or do not. There is no try.'
