@@ -6,11 +6,20 @@ parameters:
 - name: List
   type: object
   default: [ One, Two, Three ]
+
 - name: Boolean
   displayName: Display number of items
   type: boolean
+
 - name: AdditionalVariables
   type: object
+  default:
+    qux: quux
+
+- name: AdditionalStep
+  type: step
+  default:
+    script: echo '¡Hola, Mundo!'
 
 variables:
   foo: bar
@@ -31,3 +40,5 @@ steps:
 
 - script: echo 'qux = $(qux)'
   displayName: Display variable qux
+
+- ${{ parameters.AdditionalStep }}
