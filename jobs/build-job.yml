@@ -1,0 +1,4 @@
+jobs:
+- job: BuildJob
+  steps:
+  - template: ..\Steps\build-step.yml
