@@ -9,6 +9,7 @@ parameters:
 
 steps:
 - script: echo 'Items in list = ${{ length(parameters.List) }}'
+  displayName: Display number of items
 - ${{ each item in parameters.List }}:
   - script: echo 'Item = ${{ item }}'
     displayName: Display item from array
