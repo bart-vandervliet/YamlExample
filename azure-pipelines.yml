@@ -18,5 +18,9 @@ pool:
 variables:
 - group: ${{ parameters.Environment }}Variables
 
+
 steps:
 - script: echo foo = $(foo)
+- script: echo parameters.Environment = ${{ parameters.Environment }}
+- script: echo $[ eq(variables['foo'], 'production') ]
+- script: echo $[ ne(variables.foo, 'production') ]
