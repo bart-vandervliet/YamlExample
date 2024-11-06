@@ -21,6 +21,8 @@ variables:
   value: $[ eq(variables['foo'], 'production') ]
 - name: RuntimeExpressionPropertyDereference
   value: $[ ne(variables.foo, 'production') ]
+- name: Foo
+  value: $[ eq(parameters.Enviroment, 'Development') ]
 
 steps:
 - script: echo foo = $(foo)
@@ -39,7 +41,7 @@ steps:
   displayName: Set variable localVar
   name: SetLocalVariable
 
-- script: echo ${{ variables.RuntimeExpressionIndex }}
+- script: echo ${{ variables.Foo }}
 
 - script: echo localVar = $(localVar)
   displayName: Display variable localVar
