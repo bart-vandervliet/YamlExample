@@ -9,6 +9,12 @@ parameters:
 - name: Boolean
   displayName: Display number of items
   type: boolean
+- name: AdditionalVariables
+  type: object
+
+variables:
+  foo: bar
+  ${{ insert }}: ${{ parameters.AdditionalVariables }}
 
 steps:
 - ${{ if parameters.Boolean }}:
@@ -22,3 +28,6 @@ steps:
 - ${{ each item in parameters.List }}:
   - script: echo 'Item = ${{ item }}'
     displayName: Display item from array
+
+- script: echo 'qux = $(qux)'
+  displayName: Display variable qux
