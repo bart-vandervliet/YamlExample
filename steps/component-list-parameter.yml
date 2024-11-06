@@ -1,3 +1,8 @@
+parameters:
+- name: Steps
+  type: stepList
+  default: []
+
 steps:
-- script: echo foo = $(foo)
-  displayName: Display variable foo
+- ${{ each step in parameters.Steps }}
+  - ${{ step }}
