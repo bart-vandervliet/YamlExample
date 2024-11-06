@@ -18,9 +18,35 @@ pool:
 variables:
 - group: ${{ parameters.Environment }}Variables
 
-
-steps:
-- script: echo foo = $(foo)
-- script: echo parameters.Environment = ${{ parameters.Environment }}
-- script: echo $[ eq(variables['foo'], 'production') ]
-- script: echo $[ ne(variables.foo, 'production') ]
+stages:
+- stage:
+  displayName: Build stage
+  jobs:
+  - job: AgentJob1
+    displayName: Agent job 1
+    steps:
+    - script: echo foo = $(foo)
+      displayName: Display runtime variable foo
+    - script: echo parameters.Environment = ${{ parameters.Environment }}
+      displayName: Display compile time parameter Environment
+    - script: echo $[ eq(variables['foo'], 'production') ]
+      displayName: Runtime expression - index syntax
+    - script: echo $[ ne(variables.foo, 'production') ]
+      displayName: Runtime expression - property dereference syntax 
+    - script: echo '##vso[task.setvariable variable=localVar]foo'
+      displayName: Set variable localVar
+      name: SetLocalVariable
+    - script: echo myVar = $(localVar)
+      displayName: Display variable localVar
+    - script: echo '##vso[task.setvariable variable=outputVar;isoutput=true]bar'
+      displayName: Set variable outputVar
+      name: SetOutputVariable
+  - job:
+    displayName: Agent job 2
+    dependsOn: AgentJob1
+    variables:
+      SetLocalVariableLocalVar: $[ dependencies.AgentJob1.outputs['SetLocalVariable.localVar'] ]
+    steps:
+    - script: echo myVar = $(localVar)
+      displayName: Display variable localVar - runtime variable
+    - script: echo myVar = $(SetLocalVariableLocalVar)
