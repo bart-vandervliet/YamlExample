@@ -7,8 +7,7 @@ steps:
 - script: echo 'Sonar prepare'
   displayName: Sonar prepare
 
-- ${{ each step in parameters.Steps }}:
-  - ${{ step }}
+- ${{ parameters.Steps }}
 
 - script: echo 'Sonar analysis'
   displayName: Sonar analysis
