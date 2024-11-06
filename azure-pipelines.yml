@@ -2,45 +2,20 @@
 # Start with a minimal pipeline that you can customize to build and deploy your code.
 # Add steps that build, run tests, deploy, and more:
 # https://aka.ms/yaml
-parameters:
-- name: Environment
-  type: string
-  values:
-  - Development
-  - Production
-
 trigger:
 - main
 
 pool:
   vmImage: ubuntu-latest
 
-variables:
-- group: ${{ parameters.Environment }}Variables
-
 stages:
 - stage: BuildStage
   displayName: Build stage
-  variables:
-    RuntimeExpressionIndex: $[ eq(variables['foo'], 'production') ]
-    RuntimeExpressionPropertyDereference: $[ ne(variables.foo, 'production') ]
 
   jobs:
   - job: AgentJob1
     displayName: Agent job 1
     steps:
-    - script: echo foo = $(foo)
-      displayName: Display runtime variable foo
-
-    - script: echo parameters.Environment = ${{ parameters.Environment }}
-      displayName: Display compile time parameter Environment
-    
-    - script: echo $(RuntimeExpressionIndex)
-      displayName: Runtime expression - index syntax
-    
-    - script: echo $(RuntimeExpressionPropertyDereference)
-      displayName: Runtime expression - property dereference syntax 
-    
     - script: echo '##vso[task.setvariable variable=localVar]foo'
       displayName: Set variable localVar
       name: SetLocalVariable
@@ -51,6 +26,7 @@ stages:
     - script: echo '##vso[task.setvariable variable=outputVar;isoutput=true]bar'
       displayName: Set variable outputVar
       name: SetOutputVariable
+
   - job:
     displayName: Agent job 2
     dependsOn: AgentJob1
