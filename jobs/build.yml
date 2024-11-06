@@ -1,7 +1,7 @@
 jobs:
 - job: BuildJob
   steps:
-  - template: ..\steps\component-list-parameter.yml
+  - template: ..\steps\sonar-quality-gate.yml
     parameters:
       Steps:
       - script: echo 'Injected!'
