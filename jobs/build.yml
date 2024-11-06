@@ -5,5 +5,7 @@ jobs:
     parameters:
       Steps:
       - script: echo 'Injected!'
+        displayName: Inject step
       - template: ..\steps\hello-world.yml
       - script: echo 'Third step...'
+        displayName: Inject third step
