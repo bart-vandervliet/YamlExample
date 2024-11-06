@@ -2,32 +2,11 @@
 # Start with a minimal pipeline that you can customize to build and deploy your code.
 # Add steps that build, run tests, deploy, and more:
 # https://aka.ms/yaml
+parameters:
+- name: List
+  type: object
+  default: [ One, Two, Three ]
 
-trigger:
-- main
-
-pool:
-  vmImage: ubuntu-latest
-
-stages:
-- stage:
-  displayName: Build stage
-  jobs:
-  - job:
-    displayName: Agent job 1
-    steps:
-    - script: echo Hello, world from YAML pipeline!
-      displayName: Hello World
-    - script: |
-        echo Add other tasks to build, test, and deploy your project.
-        echo See https://aka.ms/yaml
-      displayName: Run a multi-line script
-
-- stage:
-  displayName: Release stage
-  jobs:
-  - job:
-    displayName: Release job
-    steps:
-    - script: echo Hello world from Release!
-      displayName: Hello World
+steps:
+- ${{ each item in parameters.List }}:
+  - script: echo Item = ${{ item }}
