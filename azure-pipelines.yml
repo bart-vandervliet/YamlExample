@@ -22,7 +22,7 @@ variables:
 - name: RuntimeExpressionPropertyDereference
   value: $[ ne(variables.foo, 'production') ]
 - name: Foo
-  value: $[ eq(parameters.Enviroment, 'Development') ]
+  value: ${{ parameters.Environment }}
 
 steps:
 - script: echo foo = $(foo)
