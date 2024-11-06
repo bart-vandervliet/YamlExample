@@ -1,0 +1,3 @@
+steps:
+- script: echo foo = $(foo)
+  displayName: Display variable foo
