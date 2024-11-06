@@ -48,8 +48,12 @@ stages:
     displayName: Agent job 2
     dependsOn: AgentJob1
     variables:
-      SetLocalVariableLocalVar: $[ dependencies.AgentJob1.outputs['SetLocalVariable.localVar'] ]
+      LocalVarRuntimeExpression: $[ dependencies.AgentJob1.outputs['SetLocalVariable.localVar'] ]
+      OutputVarRuntimeExpression: $[ dependencies.AgentJob1.outputs['SetOutputVariable.outputVar'] ]
     steps:
-    - script: echo myVar = $(localVar)
+    - script: echo localVar = $(localVar)
       displayName: Display variable localVar - runtime variable
-    - script: echo myVar = $(SetLocalVariableLocalVar)
+    - script: echo localVar = $(LocalVarRuntimeExpression)
+      displayName: Display variable localVar - runtime expression
+    - script: echo outputVar = $(OutputVarRuntimeExpression)
+      displayName: Display variable outputVar - runtime expression
