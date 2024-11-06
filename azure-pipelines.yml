@@ -13,7 +13,12 @@ parameters:
 steps:
 - ${{ if parameters.Boolean }}:
   - script: echo 'Items in list = ${{ length(parameters.List) }}'
-    displayName: Display number of items
+    displayName: Display number of items (template expression)
+
+- script: echo 'Items in list = ${{ length(parameters.List) }}'
+  displayName: Display number of items (condition)
+  condition: ${{ parameters.Boolean }} 
+
 - ${{ each item in parameters.List }}:
   - script: echo 'Item = ${{ item }}'
     displayName: Display item from array
