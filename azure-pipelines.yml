@@ -8,5 +8,7 @@ parameters:
   default: [ One, Two, Three ]
 
 steps:
+- script: echo 'Items in list = ${{ length(parameters.List) }}'
 - ${{ each item in parameters.List }}:
-  - script: echo Item = ${{ item }}
+  - script: echo 'Item = ${{ item }}'
+    displayName: Display item from array
