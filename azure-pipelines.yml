@@ -24,23 +24,30 @@ stages:
   variables:
     RuntimeExpressionIndex: $[ eq(variables['foo'], 'production') ]
     RuntimeExpressionPropertyDereference: $[ ne(variables.foo, 'production') ]
+
   jobs:
   - job: AgentJob1
     displayName: Agent job 1
     steps:
     - script: echo foo = $(foo)
       displayName: Display runtime variable foo
+
     - script: echo parameters.Environment = ${{ parameters.Environment }}
       displayName: Display compile time parameter Environment
+    
     - script: echo $(RuntimeExpressionIndex)
       displayName: Runtime expression - index syntax
+    
     - script: echo $(RuntimeExpressionPropertyDereference)
       displayName: Runtime expression - property dereference syntax 
+    
     - script: echo '##vso[task.setvariable variable=localVar]foo'
       displayName: Set variable localVar
       name: SetLocalVariable
-    - script: echo myVar = $(localVar)
+    
+    - script: echo localVar = $(localVar)
       displayName: Display variable localVar
+    
     - script: echo '##vso[task.setvariable variable=outputVar;isoutput=true]bar'
       displayName: Set variable outputVar
       name: SetOutputVariable
@@ -50,10 +57,25 @@ stages:
     variables:
       LocalVarRuntimeExpression: $[ dependencies.AgentJob1.outputs['SetLocalVariable.localVar'] ]
       OutputVarRuntimeExpression: $[ dependencies.AgentJob1.outputs['SetOutputVariable.outputVar'] ]
+
     steps:
     - script: echo localVar = $(localVar)
       displayName: Display variable localVar - runtime variable
+    
     - script: echo localVar = $(LocalVarRuntimeExpression)
       displayName: Display variable localVar - runtime expression
+    
+    - script: echo outputVar = $(OutputVarRuntimeExpression)
+      displayName: Display variable outputVar - runtime expression
+
+- stage: ReleaseStage
+  displayName: Release stage
+  variables:
+      OutputVarRuntimeExpression: $[ dependencies.BuildStage.AgentJob1.outputs['SetOutputVariable.outputVar'] ]
+    
+  jobs:
+  - job:
+    displayName: Agent job 3
+    steps:
     - script: echo outputVar = $(OutputVarRuntimeExpression)
       displayName: Display variable outputVar - runtime expression
