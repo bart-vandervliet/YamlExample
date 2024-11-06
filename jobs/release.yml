@@ -4,5 +4,5 @@ jobs:
   - template: ..\steps\single-step.yml
     parameters:
       SingleStep:
-        script: echo 'Another injected step!'
-        displayName: Inject another step
+        script: echo 'Injected single step!'
+        displayName: Inject single step
