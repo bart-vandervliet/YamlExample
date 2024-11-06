@@ -70,6 +70,7 @@ stages:
 
 - stage: ReleaseStage
   displayName: Release stage
+  dependsOn: BuildStage
   variables:
       OutputVarRuntimeExpression: $[ dependencies.BuildStage.AgentJob1.outputs['SetOutputVariable.outputVar'] ]
     
