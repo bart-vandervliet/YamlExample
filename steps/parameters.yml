@@ -4,4 +4,4 @@ parameters:
 
 steps:
 - script: echo 'Hello, ${{ parameters.EchoParameter }}!'
-  displayName: Echo parameter ${{ parameters.EchoParameter }}
+  displayName: Echo parameter $(foo)
