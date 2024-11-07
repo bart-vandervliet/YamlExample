@@ -20,3 +20,4 @@ variables:
 
 steps:
 - script: echo foo = $(foo)
+- script: echo qux = $(qux)
