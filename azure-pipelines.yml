@@ -34,6 +34,7 @@ stages:
 
 - stage:
   displayName: Deployment release
+  dependsOn: []
   jobs:
   - deployment:
     displayName: Development release
@@ -46,6 +47,7 @@ stages:
 
 - stage:
   displayName: Production release
+  dependsOn: []
   jobs:
   - deployment:
     displayName: Production release
