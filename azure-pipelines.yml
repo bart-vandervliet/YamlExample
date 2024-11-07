@@ -20,7 +20,7 @@ variables:
 steps:
 - script: echo Hello World!
   displayName: Only runs when MultipleChoiceRadio = true
-  condition: eq(${{ parameters.BooleanValue }}, true)
+  condition: ${{ parameters.BooleanValue }}
 
 - script: echo Hello World!
   displayName: Only runs when branch is 6-conditions
