@@ -47,11 +47,15 @@ stages:
 - stage: ReleaseStage
   displayName: Release stage
   variables:
-    OutputVarRuntimeExpression: $[ stageDependencies.BuildStage.AgentJob1.outputs['SetOutputVariable.outputVar'] ]
+    OutputVarRuntimeExpression1: $[ stageDependencies.BuildStage.AgentJob1.outputs['SetOutputVariable.outputVar'] ]
+    OutputVarRuntimeExpression2: $[ stageDependencies.BuildStage.AgentJob1.outputs.SetOutputVariable.outputVar ]
 
   jobs:
   - job:
     displayName: Agent job 3
     steps:
-    - script: echo outputVar = $(OutputVarRuntimeExpression)
-      displayName: Display variable outputVar - runtime expression
+    - script: echo outputVar = $(OutputVarRuntimeExpression1)
+      displayName: Display variable outputVar - index
+
+    - script: echo outputVar = $(OutputVarRuntimeExpression2)
+      displayName: Display variable outputVar - property dereference
